@@ -1,4 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Skybox Weather
+A simple weather app that tells you your current temperature
+
 
 ## Getting Started
 
@@ -6,13 +9,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -36,3 +32,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 e39a3b41f9c7161af794775ca9343868
+
+https://api.open-meteo.com/v1/forecast?latitude=46.17509845050069&longitude=-123.00880715418805&current=temperature_2m&temperature_unit=fahrenheit&precipitation_unit=inch&forecast_days=1
+46.17509845050069, -123.00880715418805

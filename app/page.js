@@ -5,17 +5,17 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { ContactlessOutlined } from '@mui/icons-material';
 
 export default  function getWeather() {
 
   const [data, setData] = useState([]);
   const [weather, setWeather] = useState([])
   const [temp, setTemp] = useState([])
-
   const [location, setLocation] = useState();
 
   useEffect(() => { if (!navigator.geolocation) { // Geolocation is not supported by the browser // Handle the error or show a message to the user return; }
-    return Error;
+    return <p>Your Browser doesn't support geolocation. I don't know where to check the weather for!</p>;
   }},
   useEffect(() => { 
     if('geolocation' in navigator) {
@@ -39,22 +39,23 @@ export default  function getWeather() {
     setData(data);
     const preData = JSON.stringify(data);
     const weather = JSON.parse(preData);
-    setWeather(weather), console.log(JSON.stringify(weather.main.temp, null,2))
+    setWeather(weather), console.log(JSON.stringify(weather.main, null,2))
     const temp = weather.main.temp;
     setTemp(temp)
-    if (!data) {
+    console.log(temp)
+    if (!weather) {
       return <div>Loading...</div>;
     }
-
+  }
 
   return ( 
     <div>
-      <Image className='place-content-center' src={`/skybox.svg`} alt="Skybox" width="400" height="500" />
-      <Suspense fallback={<p>Loading</p>}>
+      <Image src={`/skybox.svg`} alt="Skybox" width="400" height="500" />
+
         <h3>The Current Temp is: {temp} degreees F</h3>
         <p>The temperature takes time to load, give it a second.</p>
-      </Suspense>
 
       </div>
   );
-}}
+
+}
