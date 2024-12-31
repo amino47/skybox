@@ -5,7 +5,10 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { ContactlessOutlined } from '@mui/icons-material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+
 
 export default  function getWeather() {
 
@@ -23,6 +26,7 @@ export default  function getWeather() {
         navigator.geolocation.getCurrentPosition(({ coords }) => {
             const { latitude, longitude } = coords;
             setLocation({ latitude, longitude });
+            console.log(latitude, longitude)
         })
     }
   }, []));
@@ -33,13 +37,13 @@ export default  function getWeather() {
         fetchApiData(location);
     }
   }, [location]);
-  const fetchApiData = async () => {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=46.174885&lon=-123.008958&units=imperial&exclude=minutely,hourly,alerts&appid=53ba2863d8b27c94247b127e5a04d789`);
+  const fetchApiData = async ({latitude, longitude}) => {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely,hourly,alerts&appid=b9316050883f5ed7d98200bbf5de873e`);
     const data = await res.json();
     setData(data);
     const preData = JSON.stringify(data);
     const weather = JSON.parse(preData);
-    setWeather(weather), console.log(JSON.stringify(weather.main, null,2))
+    setWeather(weather), console.log(JSON.stringify(weather, null,2))
     const temp = weather.main.temp;
     setTemp(temp)
     console.log(temp)
@@ -51,9 +55,13 @@ export default  function getWeather() {
   return ( 
     <div>
       <Image src={`/skybox.svg`} alt="Skybox" width="400" height="500" />
-
+      <Card>
+        <CardContent>
         <h3>The Current Temp is: {temp} degreees F</h3>
         <p>The temperature takes time to load, give it a second.</p>
+        </CardContent>
+      </Card>
+        
 
       </div>
   );
